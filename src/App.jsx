@@ -1,13 +1,23 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import axios from "axios";
 
 
-function App() {
-  //const [count, setCount] = useState(0)
+const App=()=> {
+  const [city, setCity] = useState('')
+  const [weather, setWeather]=useState(null)
 
-  return (
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    try{
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=34a13cba4834afab01a9379794cc87e6`)
+      setWeather(response.data)
+    } catch(error){
+      console.error(error);
+    }
+  };
+
+  /*return (
     <>
       <div className="App">
         <h1>Получаем погоду через API</h1>
@@ -31,10 +41,34 @@ function App() {
 
           </div>
         </div>
-        <script src='script.js'></script>
+      
     </div>
     </>
-  )
+  )*/
+ return(
+  <div>
+    <h1 className=' top-0 left-0 transform -translate-y-1/2 relative'>Получаем погоду через API</h1>
+      <form onSubmit={handleSubmit}>
+        <input className='form-control'
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Enter a city"
+        />
+        <button type="submit">Get Weather</button>
+      </form>
+
+      {weather && (
+        <div className='bg-lime-700 p-6 rounded-lg shadow-md mt-8'>
+          <h2>{weather.name}</h2>
+          <hr/>
+          <p>Temperature: {weather.main.temp-273}°C</p>
+          <hr/>
+          <p>Description: {weather.weather[0].description}</p>
+        </div>
+      )}
+    </div>
+ )
 }
 
 export default App
