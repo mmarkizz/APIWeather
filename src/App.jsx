@@ -1,32 +1,33 @@
-import { useState } from 'react'
+//import { useState } from 'react'
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
 
+
 function App() {
-  const [count, setCount] = useState(0)
+  //const [count, setCount] = useState(0)
 
   return (
     <>
       <div className="App">
-        <div className='col col-lg-12 text-center'>
-          <h1>Получаем погоду через API</h1>
+        <h1>Получаем погоду через API</h1>
+        <div className='col col-lg-12 text-center bg-lime-400'>
         </div>
         
         <div className='pricing-table row'>
-          <div className='package featured'>
-            <p className='package name'>Penza</p>
+          <input className='form-control' type="text" id="name" placeholder="Введите название города" required></input>
+          <button className='button-primary' type='submit'>Go</button>
+          <div className="bg-lime-400">
+            <p className='text-red-500'>Penza</p>
 
-            <hr>
+            <hr/>
             <p className='price'>10&deg;</p>
             <p className='disclaimer'>Clouds</p>
-            </hr>
+            <hr/>
 
             <ul className='features'>
               <li>Feature 1</li>
             </ul>
-
-            <button className='button-primary'>Go</button>
 
           </div>
         </div>
