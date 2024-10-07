@@ -10,41 +10,17 @@ const App=()=> {
   const handleSubmit=async(e)=>{
     e.preventDefault();
     try{
-      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=34a13cba4834afab01a9379794cc87e6`)
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6535a10f77e9bc00571f5dee3d65d630`)
       setWeather(response.data)
     } catch(error){
-      console.error(error);
+      if (error.response && error.response.status === 404) {
+        alert(`Город "${city}" не найден.`);
+      } else {
+        alert(`Произошла ошибка: ${error.message}`);
+      }
     }
   };
 
-  /*return (
-    <>
-      <div className="App">
-        <h1>Получаем погоду через API</h1>
-        <div className='col col-lg-12 text-center bg-lime-400'>
-        </div>
-        
-        <div className='pricing-table row'>
-          <input className='form-control' type="text" id="name" placeholder="Введите название города" required></input>
-          <button className='button-primary' type='submit'>Go</button>
-          <div className="bg-lime-400">
-            <p className='text-red-500'>Penza</p>
-
-            <hr/>
-            <p className='price'>10&deg;</p>
-            <p className='disclaimer'>Clouds</p>
-            <hr/>
-
-            <ul className='features'>
-              <li>Feature 1</li>
-            </ul>
-
-          </div>
-        </div>
-      
-    </div>
-    </>
-  )*/
  return(
   <div>
     <h1 className=' top-0 left-0 transform -translate-y-1/2 relative'>Получаем погоду через API</h1>
